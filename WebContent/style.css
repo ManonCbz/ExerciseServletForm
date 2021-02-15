@@ -1,0 +1,63 @@
+@charset "ISO-8859-1";
+
+
+.formCustomer {
+	width: 30vw;
+	margin: 20vh auto;
+}
+
+.formCustomer fieldset {
+	border-color: #03A9F4;
+}
+
+.formCustomer fieldset legend {
+	color: #03A9F4;
+	font-family: Tahoma, sans-serif;
+}
+
+.star {
+	color: red;
+}
+
+.rowInputForm {
+	margin: 10px 0;
+	display: flex;
+}
+	
+.rowInputForm label {
+	width: 40%;
+}
+
+.rowInputForm input {
+	width: 50%;
+}
+
+.btnBox {
+	margin: 10px -10px;
+}
+
+.btnBox button {
+	margin-right: 10px;
+}
+
+.successMessage {
+	color: #FFC107;
+	font-style: italic;
+}
+
+.customerInfo {
+	line-height: 25px;
+	font-family: Tahoma, sans-serif;
+}
+
+@media (max-width: 1400px){
+	.formCustomer {
+		width: 50vw;
+ 	}
+}
+
+@media (max-width: 800px){
+	.formCustomer {
+		width: 70vw;
+ 	}
+}

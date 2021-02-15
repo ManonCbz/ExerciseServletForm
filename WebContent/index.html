@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Bonjour</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+<form action="path" method="GET" class="formCustomer">
+	<fieldset>
+	<legend>Informations client</legend>
+		<div class="rowInputForm">
+			<label for="inputName">Nom<span class="star"> *</span></label>
+			<input type="text" id="inputName" name="nameCustomer">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputFirstName">Prénom</label>
+			<input type="text" id="inputFirstName" name="firstNameCustomer">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputAddress">Adresse de livraison<span class="star"> *</span></label>
+			<input type="text" id="inputAddress" name="addressCustomer">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputPhoneNumber">Numéro de téléphone<span class="star"> *</span></label>
+			<input type="text" id="inputPhoneNumber" name="phoneNumberCustomer">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputEmail">Adresse email</label>
+			<input type="email" id="inputEmail" name="emailCustomer">
+		</div>
+	</fieldset>
+	
+	<fieldset>
+	<legend>Infomations commande</legend>
+		<div class="rowInputForm">
+			<label for="inputDate">Date<span class="star"> *</span></label>
+			<input type="date" id="inputDate" name="orderDate">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputAmount">Montant<span class="star"> *</span></label>
+			<input type="text" id="inputAmount" name="orderAmount">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputPaymentMethod">Mode de paiement<span class="star"> *</span></label>
+			<input type="text" id="inputPaymentMethod" name="orderPaymentMethod">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputPaymentStatus">Statut du paiement</label>
+			<input type="text" id="inputPaymentStatus" name="orderPaymentStatus">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputDeliveryMethod">Mode de livraison<span class="star"> *</span></label>
+			<input type="text" id="inputDeliveryMethod" name="orderDeliveryMethod">
+		</div>
+		<div class="rowInputForm">
+			<label for="inputDeliveryStatus">Statut de la livraison</label>
+			<input type="email" id="inputDeliveryStatus" name="orderDeliveryStatus">
+		</div>
+	</fieldset>
+	
+	<div class="btnBox">
+		<button name="saveFormCustomerBtn">Valider</button>
+		<button name="resetFormCustomerBtn">Remettre à zéro</button>
+	</div>
+</form>
+
+</body>
+</html>
