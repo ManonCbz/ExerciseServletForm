@@ -36,6 +36,5 @@ Mode de livraison : <% out.print(order.getDeliveryMethod()); %><br>
 Statut de la livraison : <% out.print(order.getDeliveryStatus()); %>
 </p>
 
-
 </body>
 </html>
