@@ -1,5 +1,7 @@
 package model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Commande {
 
 	// ================================= Attributes ================================= //
@@ -11,12 +13,15 @@ public class Commande {
 		private String deliveryMethod;
 		private String deliveryStatus;
 		private Client customer;
+		private int id;
+
+		private static final AtomicInteger count = new AtomicInteger();
 
 		// ================================= Constructor  ================================= //
 		
 		public Commande(String date, String amount, String paymentMethod, String paymentStatus, String deliveryMethod,
 				String deliveryStatus, Client customer) {
-			super();
+
 			this.date = date;
 			this.amount = amount;
 			this.paymentMethod = paymentMethod;
@@ -24,6 +29,8 @@ public class Commande {
 			this.deliveryMethod = deliveryMethod;
 			this.deliveryStatus = deliveryStatus;
 			this.customer = customer;
+			this.id = count.incrementAndGet();
+
 		}
 
 		// ================================= Getter & Setter ================================= //
@@ -83,4 +90,13 @@ public class Commande {
 		public void setCustomer(Client customer) {
 			this.customer = customer;
 		}
+		
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+		
 }

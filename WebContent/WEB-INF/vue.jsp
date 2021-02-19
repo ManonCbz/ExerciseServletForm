@@ -5,6 +5,17 @@
 <%
 Client customer = (Client) request.getAttribute("customer");
 Commande order = (Commande) request.getAttribute("order");
+
+String firstName = customer.getFirstName();
+String email = customer.getEmail();
+String paymentStatus = order.getPaymentStatus();
+String deliveryStatus = order.getDeliveryStatus();
+
+
+if(firstName == "") firstName = "Non renseigné";
+if(email == "") email = "Non renseigné";
+if(paymentStatus == "") paymentStatus = "Non renseigné";
+if(deliveryStatus == "") deliveryStatus = "Non renseigné";
 %>
     
 <!DOCTYPE html>
@@ -12,7 +23,7 @@ Commande order = (Commande) request.getAttribute("order");
 <head>
 <meta charset="ISO-8859-1">
 <title>Commande</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style/style.css">
 <meta name="viewport" content="width=device-width">
 </head>
 <body>
@@ -22,18 +33,18 @@ Commande order = (Commande) request.getAttribute("order");
 <p class="customerInfo">
 Client<br>
 Nom : <% out.print(customer.getName().toUpperCase()); %><br>
-Prénom : <% out.print(customer.getFirstName()); %><br>
+Prénom : <% out.print(firstName); %><br>
 Adresse : <% out.print(customer.getAddress()); %><br>
 Numéro de téléphone : <% out.print(customer.getPhoneNumber()); %><br>
-Email : <% out.print(customer.getEmail()); %><br>
+Email : <% out.print(email); %><br>
 </p>
 <p class="customerInfo">
 Date : <% out.print(order.getDate()); %><br>
 Montant : <% out.print(order.getAmount()); %><br>
 Mode de paiement : <% out.print(order.getPaymentMethod()); %><br>
-Statut du paiement : <% out.print(order.getPaymentStatus()); %><br>
+Statut du paiement : <% out.print(paymentStatus); %><br>
 Mode de livraison : <% out.print(order.getDeliveryMethod()); %><br>
-Statut de la livraison : <% out.print(order.getDeliveryStatus()); %>
+Statut de la livraison : <% out.print(deliveryStatus); %>
 </p>
 
 </body>

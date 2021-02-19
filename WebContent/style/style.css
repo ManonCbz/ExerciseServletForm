@@ -1,0 +1,145 @@
+@charset "ISO-8859-1";
+
+.menu {
+	width: 45vw;
+    margin: 0 auto;
+    margin-top: 15vh;
+}
+
+.menu fieldset {
+	border-color: #03A9F4;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu fieldset a, .menu a {
+	font-family: sans-serif;
+	color: #007bff;
+}
+
+.test {
+	border: 2px solid #03A9F4;
+	border-style: groove;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+	padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    box-sizing: initial;
+}
+
+.menu2 {
+	width: 45vw;
+    margin: 0 auto;
+    margin-top: 1vh;
+}
+
+.formCustomer {
+	width: 45vw;
+	margin: 2vh auto;
+}
+
+.formCustomer fieldset {
+	border-color: #03A9F4;
+}
+
+.formCustomer fieldset legend {
+	color: #03A9F4;
+	font-family: Tahoma, sans-serif;
+}
+
+.star {
+	color: red;
+}
+
+.rowInputForm {
+	margin: 10px 0;
+	display: flex;
+}
+	
+.rowInputForm label {
+	width: 40%;
+}
+
+.rowInputForm input {
+	width: 50%;
+}
+
+.btnBox {
+	margin: 10px -10px;
+}
+
+.btnBox button {
+	margin-right: 10px;
+}
+
+.successMessage {
+	color: #FFC107;
+	font-style: italic;
+}
+
+.customerInfo {
+	line-height: 25px;
+	font-family: Tahoma, sans-serif;
+}
+
+.btnCheck {
+	margin: 0;
+    width: 20%;
+}
+
+.checkboxBtn{
+	border-radius: 50%;
+    color: white;
+    border: 1px solid gray;
+}
+
+.checkboxBtnOk {
+    color: #007eff;
+    background: #007eff;
+}
+
+.table {
+	font-size: 12px;
+}
+
+.table th {
+	color: #03A9F4;
+	font-size: 13px;
+}
+
+.errorMsg {
+	color: red;
+	font-style: italic;
+}
+
+.btnCheckp {
+	margin: 0;	
+	margin-right: 20px;
+}
+
+button {
+	cursor: pointer;
+}
+
+table thead {
+	text-align: center;
+}
+
+
+@media (max-width: 1400px){
+	.formCustomer, .menu, .menu2 {
+		width: 65vw;
+ 	}
+}
+
+@media (max-width: 800px){
+	.formCustomer, .menu, .menu2{
+		width: 70vw;
+ 	}
+}

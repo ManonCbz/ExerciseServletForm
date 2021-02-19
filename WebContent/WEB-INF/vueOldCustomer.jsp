@@ -1,3 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import ="model.Client"%>
+<%@ page import = "java.util.*" %>
+
+<%
+	ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,28 +31,30 @@
 	<legend>Informations client</legend>
 		<div class="rowInputForm">
 			<label for="inputName">Nouveau client<span class="star"> *</span></label>
-			<p class="btnCheckp"><button name="newCustomer" class="checkboxBtn checkboxBtnOk">-</button> Oui</p>
-			<p class="btnCheckp"><button name="oldCustomer" class="checkboxBtn">-</button> Non</p>
+			<p class="btnCheckp"><button name="newCustomer" class="checkboxBtn">-</button> Oui</p>
+			<p class="btnCheckp"><button name="oldCustomer" class="checkboxBtn checkboxBtnOk">-</button> Non</p>
 		</div>
 		<div class="rowInputForm">
-			<label for="inputName">Nom<span class="star"> *</span></label>
-			<input type="text" id="inputName" name="nameCustomer">
-		</div>
-		<div class="rowInputForm">
-			<label for="inputFirstName">Prénom</label>
-			<input type="text" id="inputFirstName" name="firstNameCustomer">
-		</div>
-		<div class="rowInputForm">
-			<label for="inputAddress">Adresse de livraison<span class="star"> *</span></label>
-			<input type="text" id="inputAddress" name="addressCustomer">
-		</div>
-		<div class="rowInputForm">
-			<label for="inputPhoneNumber">Numéro de téléphone<span class="star"> *</span></label>
-			<input type="text" id="inputPhoneNumber" name="phoneNumberCustomer">
-		</div>
-		<div class="rowInputForm">
-			<label for="inputEmail">Adresse email</label>
-			<input type="email" id="inputEmail" name="emailCustomer">
+			    <%
+			    
+			    if(listeClient != null) {
+			    	%> 
+			    	<select name="selectCustomer" id="selectCustomer">
+			    		<option value="">Choisissez un client...</option> 
+				    	<%
+					    for (int i = 0; i < listeClient.size(); i++) {
+					     	%><option value="<% out.print(listeClient.get(i).getId()); %>"><% out.print(listeClient.get(i).getName() + " " + listeClient.get(i).getFirstName()); %></option><%
+					    }
+				    	%>			
+			    	</select>
+			    	<%
+			    }
+			    else {
+			    	%> <p class="errorMsg">Il n'y a aucun client enregistré</p> <%
+			    }
+
+			    
+			    %>
 		</div>
 	</fieldset>
 	

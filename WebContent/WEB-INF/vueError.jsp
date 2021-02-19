@@ -31,14 +31,27 @@ for (int i = 0; i < errorList.size(); i++) {
 <head>
 <meta charset="ISO-8859-1">
 <title>Erreur</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style/style.css">
 <meta name="viewport" content="width=device-width">
 </head>
 <body>
 
-<form action="path" method="GET" class="formCustomer">
+<div class="menu">
+	<div class="test">
+		<a href="index.html">Créer une nouvelle commande</a>
+		<a href="customerList.jsp">Voir les clients existants</a>
+		<a href="orderList.jsp">Voir les commandes existantes</a>
+	</div>
+</div>
+
+<form action="path" method="POST" class="formCustomer">
 	<fieldset>
 	<legend>Informations client</legend>
+		<div class="rowInputForm">
+			<label for="inputName">Nouveau client<span class="star"> *</span></label>
+			<p class="btnCheckp"><button name="newCustomer" class="checkboxBtn checkboxBtnOk">-</button> Oui</p>
+			<p class="btnCheckp"><button name="oldCustomer" class="checkboxBtn">-</button> Non</p>
+		</div>
 		<div class="rowInputForm">
 			<label for="inputName">Nom<span class="star"> *</span></label>
 			<input style="<% out.print(cssName); %>" type="text" id="inputName" name="nameCustomer" value="<% out.print(infoOk.get(0)); %>">
