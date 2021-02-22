@@ -22,9 +22,23 @@ for (int i = 0; i < errorList.size(); i++) {
 	if(errorList.get(i) == "amount") cssAmount = "border-color:red";
 	if(errorList.get(i) == "paymentMethod") cssPaymentMethod = "border-color:red";
 	if(errorList.get(i) == "deliveryMethod") cssDeliveryMethod = "border-color:red";
+	
 }
 
 %>
+
+<c:forEach items="${ error }" var="value">
+
+	<c:set var="cssName" value="${ value == 'name' ? '' : ''}" scope="page" />
+	<c:set var="cssAddress" value="" scope="page" />
+	<c:set var="cssPhoneNumber" value="" scope="page" />
+	<c:set var="cssDate" value="" scope="page" />
+	<c:set var="cssAmount" value="" scope="page" />
+	<c:set var="cssPaymentMethod" value="" scope="page" />
+	<c:set var="cssDeliveryMethod" value="" scope="page" />
+
+</c:forEach>
+
 
 <!DOCTYPE html>
 <html>

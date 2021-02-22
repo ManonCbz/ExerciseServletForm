@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import ="model.Client"%>
-<%@ page import = "java.util.*" %>
 
-<%
-	ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,50 +22,39 @@
 
 <div class="menu2">
 
-	<% 
-	if (listeClient != null) {
-	%>
-	<table class="table table-striped table-bordered">
-		<thead>
-		<tr>
-			<th scope="col">Nom</th>
-			<th scope="col">Prénom</th>
-			<th scope="col">Adresse</th>
-			<th scope="col">Téléphone</th>			
-			<th scope="col">Email</th>
-			<th scope="col" style="color:red">Action</th>
-		</tr>
-		</thead>
-		<tbody>
-			
-			<%		
-				for (int i = 0; i < listeClient.size(); i++) {
-				%>
-					<tr>
-						<td><% out.print(listeClient.get(i).getName()); %></td>
-						<td><% out.print(listeClient.get(i).getFirstName()); %></td>
-						<td><% out.print(listeClient.get(i).getAddress()); %></td>
-						<td><% out.print(listeClient.get(i).getPhoneNumber()); %></td>
-						<td><% out.print(listeClient.get(i).getEmail()); %></td>
-						<td style="text-align:center; padding:0"><form action="Servlet" method="POST" aria-hidden="true" style="display:flex;justify-content:center"><input type="hidden" name="delete" value="<%out.print(listeClient.get(i).getId());%>"><input type="hidden" name="page" value="customer"><button type="submit" class="close" aria-label="Close" style="color:red; font-size:35px; cursor:pointer;">&times;</button></form></td>
-					</tr>
-				<%
-				}
-			
-			%>
-			
-		</tbody>
-	</table>
-	<%
-	} 
-	else {
-	%>
+	<c:choose>
+		<c:when test="${ listeClient != null }">
+			<table class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Prénom</th>
+					<th scope="col">Adresse</th>
+					<th scope="col">Téléphone</th>			
+					<th scope="col">Email</th>
+					<th scope="col" style="color:red">Action</th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${listeClient}" var="value">
+						<tr>
+							<td><c:out value="${value.name}" /></td>
+							<td><c:out value="${value.firstName}" /></td>
+							<td><c:out value="${value.address}" /></td>
+							<td><c:out value="${value.phoneNumber}" /></td>
+							<td><c:out value="${value.email}" /></td>
+							<td style="text-align:center; padding:0"><form action="Servlet" method="POST" aria-hidden="true" style="display:flex;justify-content:center"><input type="hidden" name="delete" value="${value.id}"><input type="hidden" name="page" value="customer"><button type="submit" class="close" aria-label="Close" style="color:red; font-size:35px; cursor:pointer;">&times;</button></form></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:when>
 		
-		<p class="errorMsg">Aucun client enregistré.</p>
-		
-	<%
-	}
-	%>
+		<c:when test="${listeClient == null }">
+			<p class="errorMsg">Aucun client enregistré.</p>
+		</c:when>
+			
+	</c:choose>
 </div>
 
 </body>

@@ -1,22 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import ="model.Client"%>
-<%@ page import ="model.Commande"%>
-<%
-Client customer = (Client) request.getAttribute("customer");
-Commande order = (Commande) request.getAttribute("order");
 
-String firstName = customer.getFirstName();
-String email = customer.getEmail();
-String paymentStatus = order.getPaymentStatus();
-String deliveryStatus = order.getDeliveryStatus();
-
-
-if(firstName == "") firstName = "Non renseigné";
-if(email == "") email = "Non renseigné";
-if(paymentStatus == "") paymentStatus = "Non renseigné";
-if(deliveryStatus == "") deliveryStatus = "Non renseigné";
-%>
+<c:set var="customer" value="${ customer }" scope="page"/>
+<c:set var="order" value="${ order }" scope="page"/>
     
 <!DOCTYPE html>
 <html>
@@ -32,19 +18,31 @@ if(deliveryStatus == "") deliveryStatus = "Non renseigné";
 
 <p class="customerInfo">
 Client<br>
-Nom : <% out.print(customer.getName().toUpperCase()); %><br>
-Prénom : <% out.print(firstName); %><br>
-Adresse : <% out.print(customer.getAddress()); %><br>
-Numéro de téléphone : <% out.print(customer.getPhoneNumber()); %><br>
-Email : <% out.print(email); %><br>
+Nom : 
+<c:out value="${ customer.name }"/> <br>
+Prénom : 
+<c:out value="${ customer.firstName == '' ? 'Non renseigné' : customer.firstName}"/><br>
+Adresse : 
+<c:out value="${ customer.address }"/><br>
+Numéro de téléphone : 
+<c:out value="${ customer.phoneNumber }"/><br>
+Email : 
+<c:out value="${ customer.email == '' ? 'Non renseigné' : customer.email}"/><br>
 </p>
+
 <p class="customerInfo">
-Date : <% out.print(order.getDate()); %><br>
-Montant : <% out.print(order.getAmount()); %><br>
-Mode de paiement : <% out.print(order.getPaymentMethod()); %><br>
-Statut du paiement : <% out.print(paymentStatus); %><br>
-Mode de livraison : <% out.print(order.getDeliveryMethod()); %><br>
-Statut de la livraison : <% out.print(deliveryStatus); %>
+Date : 
+<c:out value="${ order.date }"/><br>
+Montant : 
+<c:out value="${ order.amount }"/><br>
+Mode de paiement : 
+<c:out value="${ order.paymentMethod }"/><br>
+Statut du paiement : 
+<c:out value="${ order.paymentStatus == '' ? 'Non renseigné' : order.paymentStatus}"/><br>
+Mode de livraison : 
+<c:out value="${ order.deliveryMethod }"/><br>
+Statut de la livraison : 
+<c:out value="${ order.deliveryStatus == '' ? 'Non renseigné' : order.deliveryStatus}"/><br>
 </p>
 
 </body>
