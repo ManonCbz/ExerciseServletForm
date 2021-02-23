@@ -52,7 +52,7 @@
 							<td style="text-align:center; padding:0"><form action="Servlet" method="POST" aria-hidden="true" style="display:flex;justify-content:center"><input type="hidden" name="delete" value="<c:out value="${ value.id }" />"><input type="hidden" name="page" value="order"><button type="submit" class="close" aria-label="Close" style="color:red; font-size:35px; cursor:pointer;">&times;</button></form></td>
 						</tr>
 				</c:forEach>
-			
+				
 			</tbody>
 		</table>
 	</c:when>

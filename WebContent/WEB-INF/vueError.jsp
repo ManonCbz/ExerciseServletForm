@@ -1,41 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import ="java.util.ArrayList"%>
-<%
-ArrayList<String> errorList = (ArrayList<String>) request.getAttribute("error");
-ArrayList<String> infoOk = (ArrayList<String>) request.getAttribute("infoOk");
 
-String cssName = "";
-String cssAddress = "";
-String cssPhoneNumber = "";
-String cssDate = "";
-String cssAmount = "";
-String cssPaymentMethod = "";
-String cssDeliveryMethod = "";
+<c:set var="cssName" value="" scope="page" />
+<c:set var="cssAddress" value="" scope="page" />
+<c:set var="cssPhoneNumber" value="" scope="page" />
+<c:set var="cssDate" value="" scope="page" />
+<c:set var="cssAmount" value="" scope="page" />
+<c:set var="cssPaymentMethod" value="" scope="page" />
+<c:set var="cssDeliveryMethod" value="" scope="page" />
 
-for (int i = 0; i < errorList.size(); i++) {
-	
-	if(errorList.get(i) == "name") cssName = "border-color:red";
-	if(errorList.get(i) == "address") cssAddress = "border-color:red";
-	if(errorList.get(i) == "phoneNumber") cssPhoneNumber = "border-color:red";
-	if(errorList.get(i) == "date") cssDate = "border-color:red";
-	if(errorList.get(i) == "amount") cssAmount = "border-color:red";
-	if(errorList.get(i) == "paymentMethod") cssPaymentMethod = "border-color:red";
-	if(errorList.get(i) == "deliveryMethod") cssDeliveryMethod = "border-color:red";
-	
-}
 
-%>
+<c:forEach items="${error}" var="value">
 
-<c:forEach items="${ error }" var="value">
+	<c:choose>
+		<c:when test="${ value == 'name' }"><c:set var="cssName" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'address' }"><c:set var="cssAddress" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'phoneNumber' }"><c:set var="cssPhoneNumber" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'date' }"><c:set var="cssDate" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'amount' }"><c:set var="cssAmount" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'paymentMethod' }"><c:set var="cssPaymentMethod" value="border-color: red"/></c:when>
+		<c:when test="${ value == 'deliveryMethod' }"><c:set var="cssDeliveryMethod" value="border-color: red"/></c:when>
+	</c:choose>
 
-	<c:set var="cssName" value="${ value == 'name' ? '' : ''}" scope="page" />
-	<c:set var="cssAddress" value="" scope="page" />
-	<c:set var="cssPhoneNumber" value="" scope="page" />
-	<c:set var="cssDate" value="" scope="page" />
-	<c:set var="cssAmount" value="" scope="page" />
-	<c:set var="cssPaymentMethod" value="" scope="page" />
-	<c:set var="cssDeliveryMethod" value="" scope="page" />
 
 </c:forEach>
 
@@ -68,23 +54,23 @@ for (int i = 0; i < errorList.size(); i++) {
 		</div>
 		<div class="rowInputForm">
 			<label for="inputName">Nom<span class="star"> *</span></label>
-			<input style="<% out.print(cssName); %>" type="text" id="inputName" name="nameCustomer" value="<% out.print(infoOk.get(0)); %>">
+			<input style="<c:out value="${ cssName }"/>" type="text" id="inputName" name="nameCustomer" value="<c:out value="${ infoOk.get(0) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputFirstName">Prénom</label>
-			<input type="text" id="inputFirstName" name="firstNameCustomer" value="<% out.print(infoOk.get(1)); %>">
+			<input type="text" id="inputFirstName" name="firstNameCustomer" value="<c:out value="${ infoOk.get(1) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputAddress">Adresse de livraison<span class="star"> *</span></label>
-			<input style="<% out.print(cssAddress); %>" type="text" id="inputAddress" name="addressCustomer" value="<% out.print(infoOk.get(2)); %>">
+			<input style="<c:out value="${ cssAddress }"/>" type="text" id="inputAddress" name="addressCustomer" value="<c:out value="${ infoOk.get(2) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputPhoneNumber">Numéro de téléphone<span class="star"> *</span></label>
-			<input style="<% out.print(cssPhoneNumber); %>" type="text" id="inputPhoneNumber" name="phoneNumberCustomer" value="<% out.print(infoOk.get(3)); %>">
+			<input style="<c:out value="${ cssPhoneNumber }"/>" type="text" id="inputPhoneNumber" name="phoneNumberCustomer" value="<c:out value="${ infoOk.get(3) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputEmail">Adresse email</label>
-			<input type="email" id="inputEmail" name="emailCustomer" value="<% out.print(infoOk.get(4)); %>">
+			<input type="email" id="inputEmail" name="emailCustomer" value="<c:out value="${ infoOk.get(4) }" />">
 		</div>
 	</fieldset>
 	
@@ -92,27 +78,27 @@ for (int i = 0; i < errorList.size(); i++) {
 	<legend>Infomations commande</legend>
 		<div class="rowInputForm">
 			<label for="inputDate">Date<span class="star"> *</span></label>
-			<input style="<% out.print(cssDate); %>" type="date" id="inputDate" name="orderDate" value="<% out.print(infoOk.get(5)); %>">
+			<input style="<c:out value="${ cssDate }"/>" type="date" id="inputDate" name="orderDate" value="<c:out value="${ infoOk.get(5) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputAmount">Montant<span class="star"> *</span></label>
-			<input style="<% out.print(cssAmount); %>" type="text" id="inputAmount" name="orderAmount" value="<% out.print(infoOk.get(6)); %>">
+			<input style="<c:out value="${ cssAmount }"/>" type="text" id="inputAmount" name="orderAmount" value="<c:out value="${ infoOk.get(6) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputPaymentMethod">Mode de paiement<span class="star"> *</span></label>
-			<input style="<% out.print(cssPaymentMethod); %>" type="text" id="inputPaymentMethod" name="orderPaymentMethod" value="<% out.print(infoOk.get(7)); %>">
+			<input style="<c:out value="${ cssPaymentMethod }"/>" type="text" id="inputPaymentMethod" name="orderPaymentMethod" value="<c:out value="${ infoOk.get(7) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputPaymentStatus">Statut du paiement</label>
-			<input type="text" id="inputPaymentStatus" name="orderPaymentStatus" value="<% out.print(infoOk.get(8)); %>">
+			<input type="text" id="inputPaymentStatus" name="orderPaymentStatus" value="<c:out value="${ infoOk.get(8) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputDeliveryMethod">Mode de livraison<span class="star"> *</span></label>
-			<input style="<% out.print(cssDeliveryMethod); %>" type="text" id="inputDeliveryMethod" name="orderDeliveryMethod" value="<% out.print(infoOk.get(9)); %>">
+			<input style="<c:out value="${ cssDeliveryMethod }"/>" type="text" id="inputDeliveryMethod" name="orderDeliveryMethod" value="<c:out value="${ infoOk.get(9) }" />">
 		</div>
 		<div class="rowInputForm">
 			<label for="inputDeliveryStatus">Statut de la livraison</label>
-			<input type="text" id="inputDeliveryStatus" name="orderDeliveryStatus" value="<% out.print(infoOk.get(10)); %>">
+			<input type="text" id="inputDeliveryStatus" name="orderDeliveryStatus" value="<c:out value="${ infoOk.get(10) }" />">
 		</div>
 	</fieldset>
 	

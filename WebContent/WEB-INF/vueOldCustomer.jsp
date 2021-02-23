@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import ="model.Client"%>
-<%@ page import = "java.util.*" %>
-
-<%
-	ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
-
-%>
 
 <!DOCTYPE html>
 <html>
@@ -35,26 +28,19 @@
 			<p class="btnCheckp"><button name="oldCustomer" class="checkboxBtn checkboxBtnOk">-</button> Non</p>
 		</div>
 		<div class="rowInputForm">
-			    <%
-			    
-			    if(listeClient != null) {
-			    	%> 
-			    	<select name="selectCustomer" id="selectCustomer">
-			    		<option value="">Choisissez un client...</option> 
-				    	<%
-					    for (int i = 0; i < listeClient.size(); i++) {
-					     	%><option value="<% out.print(listeClient.get(i).getId()); %>"><% out.print(listeClient.get(i).getName() + " " + listeClient.get(i).getFirstName()); %></option><%
-					    }
-				    	%>			
-			    	</select>
-			    	<%
-			    }
-			    else {
-			    	%> <p class="errorMsg">Il n'y a aucun client enregistré</p> <%
-			    }
-
-			    
-			    %>
+			<c:choose>
+			<c:when test="${ listeClient != null }">
+				<select name="selectCustomer" id="selectCustomer">
+					<option value="">Choisissez un client...</option> 							
+					<c:forEach items="${ listeClient }" var="value">
+						<option value="${ value.id }"><c:out value="${ value.name } ${ value.firstName }"/></option>
+					</c:forEach>
+				</select>
+			</c:when>
+			<c:when test="${ listeClient == null }">
+				<p class="errorMsg">Il n'y a aucun client enregistré</p>
+			</c:when>
+			</c:choose>
 		</div>
 	</fieldset>
 	
