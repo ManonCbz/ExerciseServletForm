@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Connexion</title>
+<title>test</title>
+<link rel="stylesheet" href="style/style.css">
+<meta name="viewport" content="width=device-width">
 </head>
 <body>
 
