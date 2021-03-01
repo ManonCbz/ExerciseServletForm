@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Bonjour</title>
+<title>Nouvelle commande</title>
 <link rel="stylesheet" href="style/style.css">
 <meta name="viewport" content="width=device-width">
 </head>
@@ -10,7 +10,7 @@
 
 <div class="menu">
 	<fieldset>
-		<a href="index.html">Créer une nouvelle commande</a>
+		<a href="menu.jsp">Créer une nouvelle commande</a>
 		<a href="customerList.jsp">Voir les clients existants</a>
 		<a href="orderList.jsp">Voir les commandes existantes</a>
 	</fieldset>
