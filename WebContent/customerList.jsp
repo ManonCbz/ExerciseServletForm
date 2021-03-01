@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Liste de client</title>
+<title>Liste des clients</title>
 <link rel="stylesheet" href="style/style.css">
 <link href="style/bootstrap.min.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
@@ -14,7 +14,7 @@
 
 <div class="menu">
 	<div class="test">
-		<a href="index.html">Créer une nouvelle commande</a>
+		<a href="menu.jsp">Créer une nouvelle commande</a>
 		<a href="customerList.jsp">Voir les clients existants</a>
 		<a href="orderList.jsp">Voir les commandes existantes</a>
 	</div>

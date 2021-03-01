@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -36,7 +35,9 @@ public class FirstServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// Vérifie si il n'existe pas déjà une variable de session listeClient & listeCommande
+		@SuppressWarnings("unchecked")
 		ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
+		@SuppressWarnings("unchecked")
 		ArrayList<Commande> listeCommande = (ArrayList<Commande>) session.getAttribute("listeCommande");	
 		
 		// Si non -> crée une nouvelle liste
@@ -50,7 +51,7 @@ public class FirstServlet extends HttpServlet {
 		
 		// Si le bouton remise à zéro ou la checkbox bouton "nouveau client oui" est sélectionné -> redirige sur la page d'accueil
 		if(resetButton != null || newCustomer != null) {
-			this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		// Si bouton "Ancien client" -> redirige vers vueOldCustomer.jsp
 		else if(oldCustomer != null) {

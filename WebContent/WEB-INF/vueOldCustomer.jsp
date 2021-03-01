@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Bonjour</title>
+<title>Nouvelle commande</title>
 <link rel="stylesheet" href="style/style.css">
 <meta name="viewport" content="width=device-width">
 </head>

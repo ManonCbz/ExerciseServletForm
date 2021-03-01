@@ -26,7 +26,9 @@ public class Servlet extends HttpServlet {
 			
 		HttpSession session = request.getSession();
 		// Récupère les listes (variables de session)
+		@SuppressWarnings("unchecked")
 		ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
+		@SuppressWarnings("unchecked")
 		ArrayList<Commande> listeCommande = (ArrayList<Commande>) session.getAttribute("listeCommande");	
 		
 		// Récupère l'id (du client || de la commande) & s'il s'agit d'une commande ou d'un client
