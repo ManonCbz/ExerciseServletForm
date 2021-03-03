@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Client;
 import model.Commande;
+import metier.Db;
 
 public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,40 +22,20 @@ public class FirstServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// boutons valider formulaire & remise à zéro
+		// boutons
 		
-		String resetButton = request.getParameter("resetFormCustomerBtn");
 		String sendFormButton = request.getParameter("saveFormCustomerBtn");
-
-		// boutons checkbox (Nouveau client : oui non)
-		
-		String newCustomer = request.getParameter("newCustomer");
 		String oldCustomer = request.getParameter("oldCustomer");
 		
 		
 		HttpSession session = request.getSession();
 		
 		// Vérifie si il n'existe pas déjà une variable de session listeClient & listeCommande
-		@SuppressWarnings("unchecked")
-		ArrayList<Client> listeClient = (ArrayList<Client>) session.getAttribute("listeClient");
-		@SuppressWarnings("unchecked")
-		ArrayList<Commande> listeCommande = (ArrayList<Commande>) session.getAttribute("listeCommande");	
+		ArrayList<Client> listeClient = Db.recupListeClient();
+		ArrayList<Commande> listeCommande = Db.recuptListeCommande(listeClient);
 		
-		// Si non -> crée une nouvelle liste
-		if(listeClient == null) {
-			listeClient = new ArrayList<Client>();
-		}
-		
-		if(listeCommande == null) {
-			listeCommande = new ArrayList<Commande>();
-		}
-		
-		// Si le bouton remise à zéro ou la checkbox bouton "nouveau client oui" est sélectionné -> redirige sur la page d'accueil
-		if(resetButton != null || newCustomer != null) {
-			this.getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
-		}
 		// Si bouton "Ancien client" -> redirige vers vueOldCustomer.jsp
-		else if(oldCustomer != null) {
+		if (oldCustomer != null) {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/vueOldCustomer.jsp").forward(request, response);
 		}
 		// Si le bouton d'envoi du formulaire est ok
@@ -102,13 +83,15 @@ public class FirstServlet extends HttpServlet {
 				
 				// Si ce client ne se trouve pas dans la liste -> enregistre celui-ci
 				if(!listeClient.contains(customer)) {
-					listeClient.add(customer);					
+					listeClient.add(customer);
+					Db.addClient(customer);
 				}
 				
 				// Crée nouvelle commande et ajout dans la liste
 				Commande order = new Commande(dateOrder, amount, paymentMethod, paymentStatus, deliveryMethod, deliveryStatus, customer);
 				
 				listeCommande.add(order);
+				Db.addCommande(order);
 				
 				// Envoi les infos de la commande concernée à la vue
 				request.setAttribute("customer", customer);
@@ -152,8 +135,17 @@ public class FirstServlet extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/vueError.jsp").forward(request, response);
 			}
 		}
-	}
+		
+		// Envoi ou MAJ des variables sessions listeClient & listeCommande
+		session.setAttribute("listeClient", listeClient);
+		session.setAttribute("listeCommande", listeCommande);
+		
+		if(oldCustomer == null && sendFormButton == null) {
+			this.getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
+		}
 
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

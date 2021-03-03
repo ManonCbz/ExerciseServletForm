@@ -29,7 +29,7 @@
 		</div>
 		<div class="rowInputForm">
 			<c:choose>
-			<c:when test="${ listeClient != null }">
+			<c:when test="${ listeClient.size() > 0 }">
 				<select name="selectCustomer" id="selectCustomer">
 					<option value="">Choisissez un client...</option> 							
 					<c:forEach items="${ listeClient }" var="value">
@@ -37,7 +37,7 @@
 					</c:forEach>
 				</select>
 			</c:when>
-			<c:when test="${ listeClient == null }">
+			<c:when test="${ listeClient.size() == 0 }">
 				<p class="errorMsg">Il n'y a aucun client enregistré</p>
 			</c:when>
 			</c:choose>

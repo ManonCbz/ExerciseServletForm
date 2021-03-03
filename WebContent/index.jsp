@@ -12,11 +12,11 @@
 
 <form action="log" method="POST" class="connectionForm">
 	<div>
-		<label for="username">Pseudo :</label>
+		<label for="username">Pseudo :</label><br>
 		<input type="text" name="username" id="username">
 	</div>
 	<div>
-		<label for="password">Mot de passe :</label>
+		<label for="password">Mot de passe :</label><br>
 		<input type="password" name="password" id="password">
 	</div>
 	<button type="submit" name="logBtn">Ok</button>

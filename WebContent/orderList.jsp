@@ -24,7 +24,7 @@
 <div class="menu2">
 
 	<c:choose>
-	<c:when test="${ listeCommande != null}">
+	<c:when test="${ listeCommande.size() > 0 }">
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -42,7 +42,12 @@
 			
 				<c:forEach items="${ listeCommande }" var="value">
 						<tr>
-							<td><c:out value="${ value.customer.name } ${ value.customer.firstName }"/></td>
+							<td>
+							<c:choose>
+								<c:when test="${ value.customer == null }">Supprimé</c:when>
+								<c:when test="${ value.customer != null }"><c:out value="${ value.customer.name } ${ value.customer.firstName }"/></c:when>
+							</c:choose>
+							</td>
 							<td><c:out value="${ value.date }"/></td>
 							<td><c:out value="${ value.amount }"/></td>
 							<td><c:out value="${ value.paymentMethod }"/></td>
@@ -57,7 +62,7 @@
 		</table>
 	</c:when>
 	
-	<c:when test="${ listeCommande == null }">
+	<c:when test="${ listeCommande.size() == 0 }">
 		<p class="errorMsg">Aucune commande enregistrée.</p>
 	</c:when>
 	</c:choose>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import metier.Db;
 import model.Client;
 import model.Commande;
 
@@ -40,15 +41,21 @@ public class Servlet extends HttpServlet {
 			// Parcours la liste et supprime le client avec le même id	
 			for(int i = 0; i < listeClient.size(); i++) {
 				if(listeClient.get(i).getId() == supprimerID) {
+
+					for(int j = 0; j < listeCommande.size(); j++) {
+						if(listeCommande.get(j).getCustomer().getId() == listeClient.get(i).getId()) {
+							listeCommande.get(j).setCustomer(null);
+						}
+					}
+					
+					Db.deleteClient(listeClient.get(i));
 					listeClient.remove(i);
 				}
 			}
-			// Si il n'y a plus de client dans la liste, la liste devient null
-			if(listeClient.size() == 0) {
-				listeClient = null;
-			}
+
 			// MAJ de la liste et redirection sur la vue qui liste les client
-			session.setAttribute("listeClient", listeClient);			
+			session.setAttribute("listeClient", listeClient);	
+			session.setAttribute("listeCommande", listeCommande);
 			this.getServletContext().getRequestDispatcher("/customerList.jsp").forward(request, response);			
 		}
 		// Si l'utilisateur souhaite supprimer une commande
@@ -56,13 +63,11 @@ public class Servlet extends HttpServlet {
 			// Parcours la liste et supprime la commande avec le même id	
 			for(int i = 0; i < listeCommande.size(); i++) {
 				if(listeCommande.get(i).getId() == supprimerID) {
+					Db.deleteCommande(listeCommande.get(i));
 					listeCommande.remove(i);
 				}
 			}
-			// Si il n'y a plus de commande dans la liste, la liste devient null
-			if(listeCommande.size() == 0) {
-				listeCommande = null;
-			}
+
 			// MAJ de la liste et redirection sur la vue qui liste les commandes
 			session.setAttribute("listeCommande", listeCommande);
 			this.getServletContext().getRequestDispatcher("/orderList.jsp").forward(request, response);			

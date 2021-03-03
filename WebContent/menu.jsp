@@ -1,3 +1,5 @@
+<c:if test="${ listeClient == null }"><c:redirect url="/path"></c:redirect></c:if>
+
 <!DOCTYPE html>
 <html>
 <head>

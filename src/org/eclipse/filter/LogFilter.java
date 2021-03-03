@@ -29,18 +29,12 @@ public class LogFilter implements Filter {
 		String chemin = req.getServletPath();
 		// Récupère la méthode HTTP utilisée (GET ou POST)
 		String methode = req.getMethod();
-		
-		boolean isStaticResource = ((HttpServletRequest) request).getRequestURI().startsWith("TPJEEForm/style/");
-		
+				
 		if(connection != null || chemin.equals("/") || chemin.equals("/index.jsp") || chemin.equals("/log") && methode.equals("POST") || req.getRequestURI().toString().contains(".css")) {
-
 			    chain.doFilter(request, response);
-			    System.out.println("Filter : ok");
 		}
 		else {
 			req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, res);
-			System.out.println("Filter: ko");
-			
 		}
 	}
 }

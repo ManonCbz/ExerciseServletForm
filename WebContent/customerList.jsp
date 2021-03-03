@@ -23,7 +23,7 @@
 <div class="menu2">
 
 	<c:choose>
-		<c:when test="${ listeClient != null }">
+		<c:when test="${ listeClient.size() > 0 }">
 			<table class="table table-striped table-bordered">
 				<thead>
 				<tr>
@@ -50,7 +50,7 @@
 			</table>
 		</c:when>
 		
-		<c:when test="${listeClient == null }">
+		<c:when test="${ listeClient.size() == 0  }">
 			<p class="errorMsg">Aucun client enregistré.</p>
 		</c:when>
 			

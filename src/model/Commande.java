@@ -6,6 +6,7 @@ public class Commande {
 
 		// ================================= Attributes ================================= //
 	
+		private int id;
 		private String date;
 		private String amount;
 		private String paymentMethod;
@@ -13,7 +14,6 @@ public class Commande {
 		private String deliveryMethod;
 		private String deliveryStatus;
 		private Client customer;
-		private int id;
 
 		private static final AtomicInteger count = new AtomicInteger();
 
@@ -22,6 +22,7 @@ public class Commande {
 		public Commande(String date, String amount, String paymentMethod, String paymentStatus, String deliveryMethod,
 				String deliveryStatus, Client customer) {
 
+			this.id = count.incrementAndGet();
 			this.date = date;
 			this.amount = amount;
 			this.paymentMethod = paymentMethod;
@@ -29,7 +30,20 @@ public class Commande {
 			this.deliveryMethod = deliveryMethod;
 			this.deliveryStatus = deliveryStatus;
 			this.customer = customer;
-			this.id = count.incrementAndGet();
+
+		}
+		
+		public Commande(int id, String date, String amount, String paymentMethod, String paymentStatus, String deliveryMethod,
+				String deliveryStatus, Client customer) {
+
+			this.id = id;
+			this.date = date;
+			this.amount = amount;
+			this.paymentMethod = paymentMethod;
+			this.paymentStatus = paymentStatus;
+			this.deliveryMethod = deliveryMethod;
+			this.deliveryStatus = deliveryStatus;
+			this.customer = customer;
 
 		}
 
