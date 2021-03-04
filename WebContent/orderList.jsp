@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<c:if test="${ listeCommande == null }"><c:redirect url="/path"></c:redirect></c:if>
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,7 @@
 					<th scope="col">Statut de paiement</th>
 					<th scope="col">Mode de livraison</th>	
 					<th scope="col">Statut de livraison</th>
+					<th scope="col">Détail de la commande</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
@@ -54,10 +56,29 @@
 							<td><c:out value="${ value.paymentStatus }"/></td>
 							<td><c:out value="${ value.deliveryMethod }"/></td>
 							<td><c:out value="${ value.deliveryStatus }"/></td>
-							<td style="text-align:center; padding:0"><form action="Servlet" method="POST" aria-hidden="true" style="display:flex;justify-content:center"><input type="hidden" name="delete" value="<c:out value="${ value.id }" />"><input type="hidden" name="page" value="order"><button type="submit" class="close" aria-label="Close" style="color:red; font-size:35px; cursor:pointer;">&times;</button></form></td>
+							<td>
+								<ul>
+									<c:forEach items="${ value.listeAchat.keySet() }" var="i">
+										<li>
+											<c:forEach items="${ listeProduit }" var="j">
+												<c:if test="${ i == j.id }"><c:out value="${ j.nom }"/></c:if>
+											</c:forEach>
+											<span class="typeProduct">(<c:out value="${ value.listeAchat.get(i) }"/>)</span>
+										</li>
+									</c:forEach>
+								</ul>
+							</td>
+							<td class="actionTD">
+								<form action="Servlet" method="POST" aria-hidden="true">
+									<input type="hidden" name="delete" value="<c:out value="${ value.id }" />">
+									<input type="hidden" name="page" value="order">
+									<button type="submit" name="updateBtn" class="updateBtn" title="Modifier"><img src="style/img/writing.png"></button>
+									/
+									<button type="submit" name="deleteBtn" class="updateBtn" title="Supprimer"><img src="style/img/trash.png"></button>
+								</form>
+							</td>
 						</tr>
 				</c:forEach>
-				
 			</tbody>
 		</table>
 	</c:when>

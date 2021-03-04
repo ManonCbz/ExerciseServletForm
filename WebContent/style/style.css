@@ -52,6 +52,10 @@
     margin-top: 1vh;
 }
 
+.menu2 ul {
+	padding-left: 10px;
+}
+
 .formCustomer {
 	width: 45vw;
 	margin: 2vh auto;
@@ -144,9 +148,68 @@ table thead {
 	text-align: center;
 }
 
+.actionTD button {
+	border: none;
+	width: 15px;
+	padding: 0;
+	background: transparent;
+}
+
+.actionTD {
+	padding: 0;
+	text-align: center;
+}
+
+.actionTD form {
+	display: flex;
+	font-size: 20px;
+}
+
+.actionTD img {
+	width: 15px;
+}
+
+h3 {
+	color: #03A9F4;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+.tabProduct {
+	width: 100%;
+	text-align: center;
+}	
+
+.tabProduct tr {
+	height: 50px;
+}
+
+.tabProduct td {
+	width: 50%;
+}
+
+.firstColumn {
+	text-align: right;
+	font-family: monospace;
+}
+
+.secondColumn {
+	padding-left: 20px;
+	text-align: left;
+}
+
+.tabProduct input {
+	width: 50px;
+}
+
+.typeProduct {
+	color: grey;
+	font-size: 10px;
+}
+
 @media (max-width: 1400px){
 	.formCustomer, .menu, .menu2 {
-		width: 65vw;
+		width: 75vw;
  	}
 }
 

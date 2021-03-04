@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<c:if test="${ listeClient == null }"><c:redirect url="/path"></c:redirect></c:if>
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
 					<th scope="col">Adresse</th>
 					<th scope="col">Téléphone</th>			
 					<th scope="col">Email</th>
-					<th scope="col" style="color:red">Action</th>
+					<th scope="col">Action</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -43,7 +44,16 @@
 							<td><c:out value="${value.address}" /></td>
 							<td><c:out value="${value.phoneNumber}" /></td>
 							<td><c:out value="${value.email}" /></td>
-							<td style="text-align:center; padding:0"><form action="Servlet" method="POST" aria-hidden="true" style="display:flex;justify-content:center"><input type="hidden" name="delete" value="${value.id}"><input type="hidden" name="page" value="customer"><button type="submit" class="close" aria-label="Close" style="color:red; font-size:35px; cursor:pointer;">&times;</button></form></td>
+							<td class="actionTD">
+								<form action="Servlet" method="POST" aria-hidden="true">
+									<input type="hidden" name="delete" value="<c:out value="${ value.id }" />">
+									<input type="hidden" name="page" value="customer">
+									<button type="submit" name="updateBtn" class="updateBtn" title="Modifier"><img src="style/img/writing.png"></button>
+									/
+									<button type="submit" name="deleteBtn" class="updateBtn" title="Supprimer"><img src="style/img/trash.png"></button>
+								</form>
+							</td>
+
 						</tr>
 					</c:forEach>
 				</tbody>

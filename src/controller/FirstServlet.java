@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Client;
 import model.Commande;
+import model.Produit;
 import metier.Db;
 
 public class FirstServlet extends HttpServlet {
@@ -22,8 +23,7 @@ public class FirstServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// boutons
-		
+		// Boutons
 		String sendFormButton = request.getParameter("saveFormCustomerBtn");
 		String oldCustomer = request.getParameter("oldCustomer");
 		
@@ -32,7 +32,8 @@ public class FirstServlet extends HttpServlet {
 		
 		// Vérifie si il n'existe pas déjà une variable de session listeClient & listeCommande
 		ArrayList<Client> listeClient = Db.recupListeClient();
-		ArrayList<Commande> listeCommande = Db.recuptListeCommande(listeClient);
+		ArrayList<Commande> listeCommande = Db.recupListeCommande(listeClient);
+		ArrayList<Produit> listeProduit = Db.recupListeProduit();
 		
 		// Si bouton "Ancien client" -> redirige vers vueOldCustomer.jsp
 		if (oldCustomer != null) {
@@ -46,7 +47,7 @@ public class FirstServlet extends HttpServlet {
 			String address = request.getParameter("addressCustomer");
 			String phoneNumber = request.getParameter("phoneNumberCustomer");
 			String email = request.getParameter("emailCustomer");
-						
+			
 			// Récupère l'id d'un utilisateur dans le cas d'un ancien client
 			String selectCustomer = request.getParameter("selectCustomer");
 			
@@ -83,15 +84,44 @@ public class FirstServlet extends HttpServlet {
 				
 				// Si ce client ne se trouve pas dans la liste -> enregistre celui-ci
 				if(!listeClient.contains(customer)) {
-					listeClient.add(customer);
 					Db.addClient(customer);
 				}
 				
+				listeClient = Db.recupListeClient();
+				
+				for(Client c : listeClient ) {
+					if(customer.getName().equals(c.getName()) && customer.getFirstName().equals(c.getFirstName()) && customer.getAddress().equals(c.getAddress()) && customer.getPhoneNumber().equals(c.getPhoneNumber())) {
+						customer = c;
+					}
+				}
+
 				// Crée nouvelle commande et ajout dans la liste
 				Commande order = new Commande(dateOrder, amount, paymentMethod, paymentStatus, deliveryMethod, deliveryStatus, customer);
+								
+				for(Produit p : listeProduit) {
+					
+					String idString = request.getParameter(String.valueOf(p.getId()));
+					
+					if(idString != null) System.out.println("id produit : " + p.getId() + " / nb : " + idString);
+					
+					int id = Integer.parseInt(idString);
+					
+					if(id != 0) order.getListeAchat().put(p.getId(), id);
+					
+				}
 				
-				listeCommande.add(order);
 				Db.addCommande(order);
+				listeCommande = Db.recupListeCommande(listeClient);
+				
+				for(Commande c : listeCommande) {
+					
+					if(order.getDate().equals(c.getDate()) && order.getAmount().equals(c.getAmount()) && order.getCustomer().getFirstName().equals(c.getCustomer().getFirstName()) && order.getCustomer().getName().equals(c.getCustomer().getName())) {
+						order.setId(c.getId());
+					}
+				}
+				
+				Db.addAchatCommande(order);
+				listeCommande = Db.recupListeCommande(listeClient);
 				
 				// Envoi les infos de la commande concernée à la vue
 				request.setAttribute("customer", customer);
@@ -103,7 +133,7 @@ public class FirstServlet extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/vue.jsp").forward(request, response);
 			}
 			else {
-				// Liste d'erreur & Liste d'informations données (celle-ci servira à re remplir les cases déjà remplises dans le form)
+				// Liste d'erreur & Liste d'informations données (celle-ci servira à re remplir les cases déjà remplies dans le form)
 				ArrayList<String> errorList = new ArrayList<String>();
 				ArrayList<String> infoOk = new ArrayList<String>();
 				
@@ -139,6 +169,7 @@ public class FirstServlet extends HttpServlet {
 		// Envoi ou MAJ des variables sessions listeClient & listeCommande
 		session.setAttribute("listeClient", listeClient);
 		session.setAttribute("listeCommande", listeCommande);
+		session.setAttribute("listeProduit", listeProduit);
 		
 		if(oldCustomer == null && sendFormButton == null) {
 			this.getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);

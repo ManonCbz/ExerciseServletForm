@@ -13,7 +13,7 @@
 
 <div class="menu">
 	<fieldset>
-		<a href="index.html">Créer une nouvelle commande</a>
+		<a href="menu.jsp">Créer une nouvelle commande</a>
 		<a href="customerList.jsp">Voir les clients existants</a>
 		<a href="orderList.jsp">Voir les commandes existantes</a>
 	</fieldset>
@@ -70,6 +70,20 @@
 			<label for="inputDeliveryStatus">Statut de la livraison</label>
 			<input type="text" id="inputDeliveryStatus" name="orderDeliveryStatus">
 		</div>
+	
+		<h3>Produits : </h3>
+		
+		<table class="tabProduct">
+			<tbody>
+				<c:forEach var="p" items="${ listeProduit }">
+					<tr class="productList">
+						<td class="firstColumn"><label for="product"><c:out value="${ p.nom }"/><br><span class="typeProduct"><c:out value="${ p.type }"/></span></label></td>
+						<td class="secondColumn"><input type="number" min="0" value="0" id="product" name="<c:out value="${ p.id }"/>"></td>
+					</tr>
+				</c:forEach>			
+			</tbody>
+		</table>
+		
 	</fieldset>
 	
 	<div class="btnBox">

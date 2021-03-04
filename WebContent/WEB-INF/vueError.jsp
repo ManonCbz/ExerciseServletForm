@@ -38,7 +38,7 @@
 
 <div class="menu">
 	<div class="test">
-		<a href="index.html">Créer une nouvelle commande</a>
+		<a href="menu.jsp">Créer une nouvelle commande</a>
 		<a href="customerList.jsp">Voir les clients existants</a>
 		<a href="orderList.jsp">Voir les commandes existantes</a>
 	</div>

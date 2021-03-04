@@ -1,7 +1,5 @@
 package model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Client {
 	
 	// ================================= Attributes ================================= //
@@ -13,12 +11,9 @@ public class Client {
 	private String phoneNumber;
 	private String email;
 	
-	private static final AtomicInteger count = new AtomicInteger();
-
 	// ================================= Constructor  ================================= //
 	
 	public Client(String name, String firstName, String address, String phoneNumber, String email) {
-		this.id = count.incrementAndGet();
 		this.name = name;
 		this.firstName = firstName;
 		this.address = address;

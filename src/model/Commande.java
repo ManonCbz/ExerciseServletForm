@@ -1,6 +1,6 @@
 package model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.HashMap;
 
 public class Commande {
 
@@ -14,15 +14,13 @@ public class Commande {
 		private String deliveryMethod;
 		private String deliveryStatus;
 		private Client customer;
-
-		private static final AtomicInteger count = new AtomicInteger();
+		private HashMap<Integer, Integer> listeAchat = new HashMap<Integer, Integer>();
 
 		// ================================= Constructor  ================================= //
 		
 		public Commande(String date, String amount, String paymentMethod, String paymentStatus, String deliveryMethod,
 				String deliveryStatus, Client customer) {
 
-			this.id = count.incrementAndGet();
 			this.date = date;
 			this.amount = amount;
 			this.paymentMethod = paymentMethod;
@@ -112,5 +110,12 @@ public class Commande {
 		public void setId(int id) {
 			this.id = id;
 		}
-		
+
+		public HashMap<Integer, Integer> getListeAchat() {
+			return listeAchat;
+		}
+
+		public void setListeAchat(HashMap<Integer, Integer> listeAchat) {
+			this.listeAchat = listeAchat;
+		}
 }
