@@ -133,7 +133,7 @@ public class Db {
 			
 			while(result.next()) {
 				
-				Produit p = new Produit(result.getInt("id"), result.getString("nom"), result.getString("type"), result.getDouble("prix"));
+				Produit p = new Produit(result.getInt("id"), result.getString("nom"), result.getString("type"), result.getDouble("prix"), result.getInt("stock"));
 				list.add(p);
 			}
 			
@@ -278,10 +278,8 @@ public class Db {
 		}
 	}
 	
-	public static void addAchatCommande(Commande commande) {
-		
-		System.out.println("ok");
-		
+	public static void addAchatCommande(Commande commande, ArrayList<Produit> produit) {
+				
 		try {
 			
 			Connection conn = connectionDB();
@@ -297,6 +295,13 @@ public class Db {
 					prepare.setInt(3, commande.getListeAchat().get(i));
 					
 					prepare.executeUpdate();
+					
+					Statement state = conn.createStatement();
+
+					int newStock = produit.get(i-1).getStock() - commande.getListeAchat().get(i);
+					
+					String queryUpdate = "UPDATE produit SET stock = " + newStock + " WHERE id = " + i + ";";
+					state.executeUpdate(queryUpdate);
 			}
 						
 		}
@@ -306,4 +311,5 @@ public class Db {
 		
 		
 	}
+
 }

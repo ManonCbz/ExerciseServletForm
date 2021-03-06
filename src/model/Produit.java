@@ -8,14 +8,16 @@ public class Produit {
 	private String nom;
 	private String type;
 	private double prix;
+	private int stock;
 
 	// ================================= Constructor  ================================= //
 
-	public Produit(int id, String nom, String type, double prix) {
+	public Produit(int id, String nom, String type, double prix, int stock) {
 		this.id = id;
 		this.nom = nom;
 		this.type = type;
 		this.prix = prix;
+		this.stock = stock;
 	}
 	
 	// ================================= Getter & Setter ================================= //
@@ -44,7 +46,11 @@ public class Produit {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	
-	
-
 }

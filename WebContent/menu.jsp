@@ -82,7 +82,17 @@
 				<c:forEach var="p" items="${ listeProduit }">
 					<tr class="productList">
 						<td class="firstColumn"><label for="product"><c:out value="${ p.nom }"/><br><span class="typeProduct"><c:out value="${ p.type }"/></span></label></td>
-						<td class="secondColumn"><input type="number" min="0" value="0" id="product" name="<c:out value="${ p.id }"/>"></td>
+						<td class="secondColumn">
+							<c:choose>
+								<c:when test="${ p.stock > 0 }">
+									<input type="number" min="0" max="<c:out value="${ p.stock }"/>" value="0" id="product" name="<c:out value="${ p.id }"/>">
+								</c:when>
+								<c:when test="${ p.stock == 0 }">
+									<p class="errorStock">Plus disponible</p>
+								</c:when>
+							</c:choose>
+							
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -120,8 +120,9 @@ public class FirstServlet extends HttpServlet {
 					}
 				}
 				
-				Db.addAchatCommande(order);
+				Db.addAchatCommande(order, listeProduit);
 				listeCommande = Db.recupListeCommande(listeClient);
+				listeProduit = Db.recupListeProduit();
 				
 				// Envoi les infos de la commande concernée à la vue
 				request.setAttribute("customer", customer);
